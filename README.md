@@ -1,45 +1,41 @@
-#Trabalho DAW-TP
+# Trabalho DAW-TP
 
-##Nome: iLearned
+## Nome: iLearned
 Ideia: Um aplicativo que guarda informações de músicas que um usuário está aprendendo.
 
-##Funções:
-	Principal:
-		Criar músicas
-		Remover músicas
-		Ver músicas e suas informações
-		Editar informações de músicas
+## Funções:
+* Principal
+  * Criar músicas
+  * Remover músicas
+  * Ver músicas e suas informações
+  * Editar informações de músicas
+  * Organizar músicas por:
+    * ordem alfabética
+	* tag
 
-		Organizar músicas por:
-								ordem alfabética
-								tag
+* API:
+  * ??
 
-		API:
-			??
-
-	Configurações:
-		Importar informações
-		Exportar informações
+* Configurações:
+	* Importar informações
+	* Exportar informações
 
 
-##To do:
+## To do:
+* Checar campos na hora de criar nova música no banco
+* Organizar listas por ordem alfabética 
+ 
+* Possibilitar mais de uma tag
+	* Na hr de adicionar ou editar tags na música, botão parada adicionar e colocar abaixo um badge com o nome o badge pode ser emovido com um clique em cima(colocar ícone de x (fechar) )
 
-	Checar campos na hora de criar nova música no banco
-	Organizar listas por ordem alfabética 
+* Elaborar Design
 
-	Possibilitar mais de uma tag
-		Na hr de adicionar ou editar tags na música, botão parada adicionar e
-		colocar abaixo um badge com o nome
-		o badge pode ser emovido com um clique em cima(colocar ícone de x (fechar) )
+* Ver api do deezer/spotfy
 
-	Elaborar Design
+* configs:
+    * sistema de import
+	* Terminar export (copiar p/ clipboard)
+	* mudar design (dark or light)?
 
-	Ver api do deezer/spotfy
-
-	configs:
-		Sistema de import
-		Terminar export (copiar p/ clipboard)
-		mudar design (dark or light)?
-
-	bug:
-		load from storage on app beginning
+* bugs:
+	* load from storage on app beginning
