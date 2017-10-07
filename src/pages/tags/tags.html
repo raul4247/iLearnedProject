@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Tags</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-group>
+    <ion-item-divider color="light">A</ion-item-divider>
+    <ion-item *ngFor="let song of list" #elem id={{song.id}}  (click)="songInfoPage(song.id)">{{song.name}}</ion-item>
+  </ion-item-group>
+   <ion-badge item-end>tag <ion-icon name="close"></ion-icon> </ion-badge>
+</ion-content>

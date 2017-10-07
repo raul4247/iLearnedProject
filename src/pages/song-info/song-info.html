@@ -1,0 +1,40 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>{{song.name}}</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-list>
+		<ion-item>
+			<h2 class="song-title">Nome da música:</h2>
+			<p>{{song.name}}</p>
+		</ion-item>
+		<ion-item>
+			<h2 class="song-title">Artista:</h2>
+			<p>{{song.artist}}</p>
+		</ion-item>
+		<ion-item>
+			<h2 class="song-title">Tag:</h2>
+			<p>{{song.tag}}</p>
+		</ion-item>
+		<ion-item>
+			<h2 class="song-title">Habilidade:</h2>
+			<rating [(ngModel)]="song.rate" 
+			readOnly="true"
+			max="5"
+			emptyStarIconName="star-outline"
+			halfStarIconName="star-half"
+			starIconName="star" 
+			nullable="false"
+			(ngModelChange)="onModelChange($event)"></rating>
+		</ion-item>
+	</ion-list>
+	<ion-fab bottom left>
+		<button ion-fab mini><ion-icon name="arrow-dropright"></ion-icon></button>
+		<ion-fab-list side="right">
+			<button ion-fab (click) = "updateSong()"><ion-icon name="md-brush"></ion-icon></button>
+			<button ion-fab (click) = "removeSong()"><ion-icon name="md-trash"></ion-icon></button>
+		</ion-fab-list>
+	</ion-fab>
+</ion-content>

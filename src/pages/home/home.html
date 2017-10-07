@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-group>
+    <ion-item *ngFor="let song of list" #elem id={{song.id}}  (click)="songInfoPage(song.id)">{{song.name}}</ion-item>
+  </ion-item-group>
+  <ion-fab bottom right >
+    <button (click) = "createSong()" ion-fab color="danger">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
