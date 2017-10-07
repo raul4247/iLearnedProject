@@ -13,13 +13,18 @@ import { DataProvider } from '../../providers/data/data';
 })
 export class TagsPage {
 	public list;
+	public tags;
+	public tagsList;
 
 	constructor(public navCtrl: NavController, 
 		public data:DataProvider){}
 
 	ionViewWillEnter(){
 		this.list = this.data.getSongsCache();
-		this.data.createTagLists;
+		this.tagsList = this.data.createTagLists();
+		this.tags = Object.keys(this.tagsList);
+
+		// FALTA ORGANIZAR EM ORDEM ALFABETICA AS TAGS
 	}
 
 	createSong(){

@@ -15,20 +15,31 @@
 		</ion-item>
 
 		<ion-item>
-			<ion-input [(ngModel)]="song.tag" type="text" placeholder="TagList"></ion-input>
+			<ion-input [(ngModel)]="tag" type="text" placeholder="TagList"></ion-input>
 		</ion-item>
+		<ion-item>
+			<button ion-button (click) = "newTag()" >Nova tag</button>
+			<br>
+			<div *ngFor="let tag of song.tag" class="tag">
+				<ion-badge>
+					{{tag}}
+					<ion-icon name="close" (click) = "removeTag(tag)"></ion-icon> 
+				</ion-badge>
+			</div>
+		</ion-item>
+
 		<ion-item>
 			<h2>Habilidade:</h2>
 			<rating [(ngModel)]="song.rate" 
-				readOnly="false"
-				max="5"
-				emptyStarIconName="star-outline"
-				halfStarIconName="star-half"
-				starIconName="star" 
-				nullable="false">
-			</rating>
-		</ion-item>
+			readOnly="false"
+			max="5"
+			emptyStarIconName="star-outline"
+			halfStarIconName="star-half"
+			starIconName="star" 
+			nullable="false">
+		</rating>
+	</ion-item>
 
-	</ion-list>
-	<button ion-button (click) = "editSong()">Alterar</button>
+</ion-list>
+<button ion-button (click) = "editSong()">Alterar</button>
 </ion-content>

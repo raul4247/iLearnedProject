@@ -16,7 +16,9 @@
 		</ion-item>
 		<ion-item>
 			<h2 class="song-title">Tag:</h2>
-			<p>{{song.tag}}</p>
+			<div *ngFor="let tag of song.tag" class="tag">
+				<ion-badge>{{tag}}</ion-badge>
+			</div>
 		</ion-item>
 		<ion-item>
 			<h2 class="song-title">Habilidade:</h2>

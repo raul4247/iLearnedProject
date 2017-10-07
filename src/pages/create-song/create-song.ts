@@ -13,6 +13,7 @@ export class CreateSongPage {
 	songArtist: string;
 	songTag: string;
 	songRate: number;
+	createdTags = [];
 
 	constructor(public navCtrl: NavController, 
 		public navParams: NavParams,
@@ -20,7 +21,7 @@ export class CreateSongPage {
 		public data:DataProvider) {}
 
 	newSong(){
-		this.data.storeNewSongCache({name: this.songName, artist: this.songArtist, tag: this.songTag, rate: this.songRate});
+		this.data.storeNewSongCache({name: this.songName, artist: this.songArtist, tag: this.createdTags, rate: this.songRate});
 		this.data.storeSongsLocal();
 		this.navCtrl.pop();
 
@@ -33,5 +34,11 @@ export class CreateSongPage {
 		});
 
 		toast.present();
+	}
+	newTag(){
+		this.createdTags.push(this.songTag);
+	}
+	removeTag(tag){
+		this.createdTags.splice(this.createdTags.indexOf(tag), 1);
 	}
 }

@@ -73,20 +73,17 @@ export class DataProvider {
 		});
 	}
 	createTagLists(){
-		var list = this.items;
+		var songs = this.items;
 		var tags = [];
 
-		// get all tags
-
-
-		// check all songs and puts into array of its tag
-
-
-/*
-		for(var i=0;i<list.length;i++){
-			if(!tags.includes(list[i].tag))
-				tags.push(list[i].tag);
+		// get song tag and place it on the tags array 
+		for(var i=0;i<songs.length;i++){
+			for(var j=0;j<songs[i].tag.length;j++){
+				if(!tags.hasOwnProperty(songs[i].tag[j]))
+					tags[songs[i].tag[j]] = [];		
+				tags[songs[i].tag[j]].push(songs[i]);
+			}
 		}
-*/		console.log(tags);
+		return tags;
 	}
 }

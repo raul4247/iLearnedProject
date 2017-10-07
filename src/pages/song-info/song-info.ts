@@ -24,6 +24,7 @@ export class SongInfoPage {
 	}
 
 	ionViewWillEnter(){
+		this.song = this.data.getSongById(this.id);
 	}
 
 	updateSong(){

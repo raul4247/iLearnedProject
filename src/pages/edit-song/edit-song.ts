@@ -11,6 +11,7 @@ import { DataProvider } from '../../providers/data/data';
 export class EditSongPage {
 	public id;
 	public song;
+	public tag;
 
 	constructor(public navCtrl: NavController, 
 		public data:DataProvider,
@@ -33,5 +34,11 @@ export class EditSongPage {
 		});
 
 		toast.present();
+	}
+	newTag(){
+		this.song.tag.push(this.tag);
+	}
+	removeTag(tag){
+		this.song.tag.splice(this.song.tag.indexOf(tag), 1);
 	}
 }
