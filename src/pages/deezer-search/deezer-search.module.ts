@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { SongInfoPage } from './song-info';
+import { DeezerSearchPage } from './deezer-search';
 import { Http } from '@angular/http';
 
 @NgModule({
   declarations: [
-    SongInfoPage,
+    DeezerSearchPage,
   ],
   imports: [
-    IonicPageModule.forChild(SongInfoPage),
+    IonicPageModule.forChild(DeezerSearchPage),
     Http
   ],
 })
-export class SongInfoPageModule {}
+export class DeezerSearchPageModule {}

@@ -6,13 +6,15 @@ import { Storage } from '@ionic/storage';
 export class DataProvider {
 	items = [];
 	tagLists = [];
-
+	deezerSong = null;
+	deezerAvailable: boolean;
 
 	constructor(public storage: Storage){
 		this.items = [];
 		this.tagLists = [];
 		// gets the local storage and puts it in cache
 		this.getSongsLocal();
+		this.getDeezerAvailableLocal();
 	}
 
 	getSongsCache(){
@@ -28,14 +30,29 @@ export class DataProvider {
 	getSongsLocal(){
 		var me = this;
 		this.storage.get('songs').then(function (json){
-			if(json!=null){
+			if(json!=null)
 				me.items = JSON.parse(json);
-				me.sortSongs();
-			}
 		});
 	}	
 
+	setDeezerAvailable(status){
+		this.deezerAvailable = status;
+		this.storage.set('deezerAvailable',status);
+	}
+
+	getDeezerAvailable(){
+		return this.deezerAvailable;
+	}
+
+	getDeezerAvailableLocal(){
+		var me = this;
+		this.storage.get('deezerAvailable').then(function (resp){
+			me.deezerAvailable = resp;
+		});		
+	}
+
 	storeSongsLocal(){
+		this.sortSongs();
 		this.storage.set('songs',JSON.stringify(this.items));
 	}
 
@@ -65,6 +82,7 @@ export class DataProvider {
 	}
 	cleanLocalStorage(){
 		this.storage.clear();
+		this.storage.set('deezerAvailable',true);
 	}
 
 	sortSongs(){
@@ -72,6 +90,7 @@ export class DataProvider {
 			return a.name.localeCompare(b.name);
 		});
 	}
+	
 	createTagLists(){
 		var songs = this.items;
 		var tags = [];
@@ -85,5 +104,15 @@ export class DataProvider {
 			}
 		}
 		return tags;
+	}
+
+	saveDeezerSongCache(song){
+		this.deezerSong = song;
+	}
+	getDeezerSongCache(){
+		return this.deezerSong;
+	}
+	clearDeezerSongCache(){
+		this.deezerSong = null;
 	}
 }

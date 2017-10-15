@@ -15,11 +15,14 @@ export class HomePage {
 	public list;
 
 	constructor(public navCtrl: NavController, 
-				public data:DataProvider){}
+		public data:DataProvider){}
 
 	ionViewDidLoad(){
-		// BUG HERE
-		this.list = this.data.getSongsCache();
+		var me = this;
+		this.data.storage.get('songs').then(function (json){
+			if(json!=null)
+				me.list = JSON.parse(json);
+		});
 	}
 
 	ionViewWillEnter(){

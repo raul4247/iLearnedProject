@@ -14,28 +14,30 @@ Ideia: Um aplicativo que guarda informações de músicas que um usuário está 
 	* tag
 
 * API:
-  * ??
+  * Deezer
+  * Fazer busca de músicas por nome
+  * Visualizar nome, artista, prévia de áudio e imagem do álbum
 
 * Configurações:
 	* Importar informações
 	* Exportar informações
-
+  * Optar por usar ou não o deezer
 
 ## To do:
-* Checar campos na hora de criar nova música no banco
-* Organizar listas por ordem alfabética 
- 
-* Possibilitar mais de uma tag
-	* Na hr de adicionar ou editar tags na música, botão parada adicionar e colocar abaixo um badge com o nome o badge pode ser emovido com um clique em cima(colocar ícone de x (fechar) )
+* bugs:
+ * nenhum (por enquanto)
 
 * Elaborar Design
 
-* Ver api do deezer/spotfy
+* Checar campos na hora de criar nova música no banco 
 
 * configs:
-    * sistema de import
-	* Terminar export (copiar p/ clipboard)
-	* mudar design (dark or light)?
+  * sistema de import
+  * fazer página about
 
-* bugs:
-	* load from storage on app beginning
+  * verificar deezer available nas paginas que o usam
+
+  * colocar deezer search no editar info
+  * check input fields
+
+  * colocar loading nos gets requests

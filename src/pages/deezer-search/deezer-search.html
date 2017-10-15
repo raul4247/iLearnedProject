@@ -1,0 +1,20 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>{{searchName}}</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<div radio-group [(ngModel)]="selectedSong">
+		<div class="row" *ngFor="let song of songResults; let i = index;">
+			<ion-radio value="{{i}}"></ion-radio>
+			<img  width="56" height="56" src="{{song.album.cover_small}}">
+			<div class="col">{{song.title_short}}</div>
+		</div>
+	</div>
+	<ion-fab bottom right>
+		<button (click) = "selectSong()" ion-fab color="primary">
+			<ion-icon name="md-checkmark"></ion-icon>
+		</button>
+	</ion-fab>
+</ion-content>

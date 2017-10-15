@@ -14,7 +14,13 @@
 			<ion-label >Exportar dados:</ion-label>
 			<ion-input [(ngModel)]="exportData"></ion-input>
 		</ion-item>
-
+		<ion-item>
+			<button ion-button (click) = "copyToClipboard()" color="light">Copiar para Clipboard</button>
+		</ion-item>
+		<ion-item>
+			<ion-label>Usar Deezer</ion-label>
+			<ion-toggle [(ngModel)]="deezer" (click) = "toogleDeezer()"></ion-toggle>
+		</ion-item>
 	</ion-list>
 	<button ion-button (click) = "cleanData()">Limpar Dados</button>
 </ion-content>

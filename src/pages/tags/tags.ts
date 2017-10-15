@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 import { CreateSongPage } from '../create-song/create-song';
 import { SongInfoPage } from '../song-info/song-info';

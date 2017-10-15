@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
+import { CommonModule } from '@angular/common';
+
 import { CreateSongPage } from './create-song';
 
 @NgModule({
@@ -8,6 +10,7 @@ import { CreateSongPage } from './create-song';
   ],
   imports: [
     IonicPageModule.forChild(CreateSongPage),
+     CommonModule
   ],
 })
 export class CreateSongPageModule {}
