@@ -8,8 +8,15 @@
 	<ion-list>
 		<ion-item>
 			<ion-label >Importar dados:</ion-label>
-			<ion-input readonly="true"></ion-input>
+			<ion-input [(ngModel)]="importData"></ion-input>
 		</ion-item>
+		<ion-item>
+			<button ion-button (click) = "checkImport()" color="light">Importar JSON</button>
+		</ion-item>		
+		<ion-item>		
+			<button ion-button (click) = "showExample()">Exemplo de objeto</button>
+		</ion-item>		
+
 		<ion-item>
 			<ion-label >Exportar dados:</ion-label>
 			<ion-input [(ngModel)]="exportData"></ion-input>
@@ -23,4 +30,5 @@
 		</ion-item>
 	</ion-list>
 	<button ion-button (click) = "cleanData()">Limpar Dados</button>
+	<button ion-button (click) = "about()">Sobre</button>
 </ion-content>

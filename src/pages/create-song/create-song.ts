@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { AudioProvider } from 'ionic-audio';
 
 import { DeezerSearchPage } from '../deezer-search/deezer-search';
 import { DataProvider } from '../../providers/data/data';
@@ -23,10 +24,19 @@ export class CreateSongPage {
 	createdTags = [];
 	public info = null;
 
+	public deezerAvailable : boolean;
+
 	constructor(public navCtrl: NavController, 
 		public navParams: NavParams,
 		public toastCtrl: ToastController,
-		public data:DataProvider) {}
+		public data:DataProvider) {
+		var deez = this.data.getDeezerAvailable();
+
+		if(deez	== null ||deez == undefined)
+			this.data.setDeezerAvailable(true);
+		else
+			this.deezerAvailable = deez;
+	}
 
 	ionViewWillEnter(){
 		this.info = this.data.getDeezerSongCache();
@@ -35,6 +45,8 @@ export class CreateSongPage {
 			this.placeDeezerInfo(this.info);
 		else
 			this.available = false;
+
+		this.deezerAvailable = this.data.getDeezerAvailable();
 	}
 
 	newSong(){
@@ -54,23 +66,32 @@ export class CreateSongPage {
 			toast.present();
 		}
 		else{
-			// SHOW WINDOW ERROR
-			console.log('nop bro');
+			let toast = this.toastCtrl.create({
+				message: 'Uma música precisa de um nome!',
+				duration: 3000,
+				position: 'bottom',
+				showCloseButton: true,
+				closeButtonText: 'OK'
+			});
+
+			toast.present();
 		}		
 	}
 
 	checkFields(){
-		//CHECK IF NAME AND ARTIST ARE FILLED UP
-		//CHECK RATING STARS
-		//CHANGE CSS IF ONE OF THEM IS NOT FILLED (RED UNDERLINE)
-		
 		if(this.info==null)
 			this.info = {id:null};
-		return true;
+		if(this.songName == undefined || this.songName == "")
+			return false;
+		else
+			return true;
 	}
 
 	newTag(){
-		this.createdTags.push(this.songTag);
+		if(this.songTag != "" && this.songTag !=undefined){
+			this.createdTags.push(this.songTag);
+			this.songTag = "";
+		}
 	}
 	removeTag(tag){
 		this.createdTags.splice(this.createdTags.indexOf(tag), 1);

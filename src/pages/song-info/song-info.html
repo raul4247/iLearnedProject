@@ -7,9 +7,9 @@
 <ion-content padding>
 	<ion-list>
 		<ion-item>
-			<ion-img width="180" height="180" src="{{songImg}}"></ion-img>
+			<ion-img width="180" height="180" src="{{deezerAvailable && songImg || 'assets/imgs/placeholder180x180.jpg'}}"></ion-img>
 		</ion-item>
-		<div *ngIf="available;">
+		<div *ngIf="available && deezerAvailable;">
 			<audio controls><source src="{{songUrl}}" type="audio/mpeg"></audio>
 		</div>
 		<ion-item>

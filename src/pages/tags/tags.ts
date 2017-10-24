@@ -20,7 +20,6 @@ export class TagsPage {
 		public data:DataProvider){}
 
 	ionViewWillEnter(){
-		this.list = this.data.getSongsCache();
 		this.tagsList = this.data.createTagLists();
 		this.tags = Object.keys(this.tagsList);
 

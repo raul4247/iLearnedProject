@@ -6,7 +6,7 @@
 
 <ion-content>
 	<ion-item-group>
-		<div *ngFor="let tag of tags">
+		<div *ngFor="let tag of tags	">
 			<ion-item-divider color="light">{{tag}}</ion-item-divider>
 			<ion-item *ngFor="let song of tagsList[tag]" #elem id={{song.id}}  (click)="songInfoPage(song.id)">{{song.name}}</ion-item>
 		</div>

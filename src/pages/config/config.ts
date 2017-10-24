@@ -11,7 +11,8 @@ import { DataProvider } from '../../providers/data/data';
 })
 export class ConfigPage {
 	public exportData: string;
-	public deezer: boolean;
+	public importData: string;
+	public deezer: boolean;	
 
 	constructor(public navCtrl: NavController, 
 		public data:DataProvider,
@@ -28,6 +29,51 @@ export class ConfigPage {
 
 	toogleDeezer(){
 		this.data.setDeezerAvailable(this.deezer);
+	}
+
+	checkImport(){
+		try{
+			let confirm = this.alertCtrl.create({
+				title: 'Confirmação:',
+				message: 'Todos os dados atuais serão sobrescritos, e tenha certeza de que os dados estão no formato do iLearned.',
+				buttons: [
+				{
+					text: 'Cancelar',
+					handler: () => {}
+				},
+				{
+					text: 'Importar',
+					handler: () => {
+						this.data.cleanCache();
+						this.data.cleanLocalStorage();
+						this.data.importSongs(JSON.parse(this.importData));
+						this.data.setDeezerAvailable(this.deezer);
+						let toast = this.toastCtrl.create({
+							message: 'Dados importados!',
+							duration: 3000,
+							position: 'bottom',
+							showCloseButton: true,
+							closeButtonText: 'OK'
+						});
+
+						toast.present();
+					}
+				}
+				]
+			});
+			confirm.present();
+		}
+		catch(e){
+			let toast = this.toastCtrl.create({
+				message: 'Erro: O formato não é JSON',
+				duration: 1500,
+				position: 'bottom',
+				showCloseButton: true,
+				closeButtonText: 'OK'
+			});
+
+			toast.present();
+		}
 	}
 
 	copyToClipboard(){
@@ -78,5 +124,24 @@ export class ConfigPage {
 			]
 		});
 		confirm.present();
+	}
+
+	showExample(){
+		let alert = this.alertCtrl.create({
+			title: 'Exemplo de objeto',
+			subTitle: '{\"name\":\"Sweet Child O Mine\",\"artist\":\"Guns N Roses\",\"tag\":[\"solo\"],\"rate\":4,\"notes\":\"Intro apenas.\",\"deezerId\":2171464,\"id\":0}',
+			buttons: ['Entendi!']
+		});
+		alert.present();
+
+	}
+
+	about(){
+		let alert = this.alertCtrl.create({
+			title: 'iLearned v1.0',
+			subTitle: 'Desenvolvido por Raul F. Mansur e Arthur de Brito B.',
+			buttons: ['Obrigado pelo app!']
+		});
+		alert.present();
 	}
 }

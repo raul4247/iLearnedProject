@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -21,16 +21,22 @@ export class SongInfoPage {
 	public available: boolean = false;
 	public notes: boolean = false;
 
+	public deezerAvailable : boolean;
+	public loader;
+
 	constructor(public navCtrl: NavController, 
 		public navParams: NavParams,
 		public alertCtrl: AlertController,
 		public toastCtrl: ToastController,
+		public loading: LoadingController,
 		public http: Http,
 		public data:DataProvider){
 		this.id = this.navParams.get("id");
 		this.song = this.data.getSongById(this.id);
 
 		if(this.song.deezerId!=null){
+			this.showLoader();
+
 			var me = this;
 			var search = 'https://api.deezer.com/track/' + this.song.deezerId;
 			this.http.get(search).map(res=>res.json()).subscribe(
@@ -41,15 +47,45 @@ export class SongInfoPage {
 			this.songNotes = this.song.notes;
 			this.notes = true;
 		}
+		this.deezerAvailable = this.data.getDeezerAvailable();	
 	}
+
 	ionViewWillEnter(){
 		this.song = this.data.getSongById(this.id);
+		if(this.song.deezerId!=null){
+			var me = this;
+			var search = 'https://api.deezer.com/track/' + this.song.deezerId;
+			this.http.get(search).map(res=>res.json()).subscribe(
+				response => me.loadDeezerInfo(response),
+				err => me.errorDeezer()		
+				);
+		}
+		if(this.song.notes.length!=0){
+			this.songNotes = this.song.notes;
+			this.notes = true;
+		}
+
+		this.deezerAvailable = this.data.getDeezerAvailable();	
 	}
 
 	loadDeezerInfo(data){
 		this.songImg = data.album.cover_medium;
 		this.songUrl = data.preview;
 		this.available = true;
+		this.dismissLoader();
+	}
+
+	errorDeezer(){
+		this.dismissLoader();
+		let toast = this.toastCtrl.create({
+			message: 'Erro na conexão com o Deezer!',
+			duration: 3000,
+			position: 'bottom',
+			showCloseButton: true,
+			closeButtonText: 'OK'
+		});
+
+		toast.present();
 	}
 
 	updateSong(){
@@ -85,5 +121,21 @@ export class SongInfoPage {
 			]
 		});
 		confirm.present();
+	}
+
+	showLoader(){
+		if(!this.loader){
+			this.loader = this.loading.create({
+				content: 'Acessando Deezer...'
+			});
+			this.loader.present();
+		}
+	}
+
+	dismissLoader(){
+		if(this.loader){
+			this.loader.dismiss();
+			this.loader = null;
+		}
 	}
 }

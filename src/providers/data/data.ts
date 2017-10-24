@@ -103,6 +103,7 @@ export class DataProvider {
 				tags[songs[i].tag[j]].push(songs[i]);
 			}
 		}
+
 		return tags;
 	}
 
@@ -114,5 +115,10 @@ export class DataProvider {
 	}
 	clearDeezerSongCache(){
 		this.deezerSong = null;
+	}
+	importSongs(json){
+		for(var i=0;i<json.length;i++)
+			this.storeNewSongCache(json[i]);
+		this.storeSongsLocal();
 	}
 }

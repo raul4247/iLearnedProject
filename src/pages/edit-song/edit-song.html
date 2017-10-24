@@ -7,16 +7,28 @@
 <ion-content padding>
 	<ion-list>
 		<ion-item>
-			<ion-input [(ngModel)]="song.name" type="text" placeholder="Nome da música"></ion-input>
+			<ion-img width="180" height="180" src="{{deezerAvailable && songImg || 'assets/imgs/placeholder180x180.jpg'}}"></ion-img>
+		</ion-item>
+		<div *ngIf="available && deezerAvailable;">
+			<audio controls><source src="{{songUrl}}" type="audio/mpeg"></audio>
+		</div>
+		<ion-item>
+			<ion-input [(ngModel)]="song.name" type="text" placeholder="Nome da música" required></ion-input>
+		</ion-item>
+		<ion-item *ngIf="deezerAvailable;">
+			<button ion-button (click) = "searchDeezer()" >Buscar no Deezer</button>
+			<br>
+			<button ion-button (click) = "clearDeezerInfo()" >Remover Dados do Deezer</button>
 		</ion-item>
 
 		<ion-item>
-			<ion-input [(ngModel)]="song.artist" type="text" placeholder="Artista"></ion-input>
+			<ion-input [(ngModel)]="song.artist" type="text" placeholder="Artista" required></ion-input>
 		</ion-item>
 
 		<ion-item>
-			<ion-input [(ngModel)]="tag" type="text" placeholder="TagList"></ion-input>
+			<ion-input [(ngModel)]="songTag" type="text" placeholder="TagList"></ion-input>
 		</ion-item>
+
 		<ion-item>
 			<button ion-button (click) = "newTag()" >Nova tag</button>
 			<br>
@@ -27,7 +39,6 @@
 				</ion-badge>
 			</div>
 		</ion-item>
-
 		<ion-item>
 			<h2>Habilidade:</h2>
 			<rating [(ngModel)]="song.rate" 
@@ -39,7 +50,10 @@
 			nullable="false">
 		</rating>
 	</ion-item>
-
+	<ion-item>
+		 <ion-label color="primary">Notas:</ion-label>
+		<ion-textarea [(ngModel)]="song.notes" placeholder="Afinação, técnicas, trechos, ..."></ion-textarea>
+	</ion-item>
 </ion-list>
 <button ion-button (click) = "editSong()">Alterar</button>
 </ion-content>

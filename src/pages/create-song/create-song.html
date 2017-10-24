@@ -6,41 +6,48 @@
 
 <ion-content padding>
 	<ion-list>
-		<ion-item>
-			<ion-img width="180" height="180" src="{{songImg}}"></ion-img>
+		<ion-item class="centerElement">
+			<ion-img width="180" height="180" src="{{deezerAvailable && songImg || 'assets/imgs/placeholder180x180.jpg'}}"></ion-img>
 		</ion-item>
+
+		<audio-track #audio [track]="track">
+			<audio-track-play dark [audioTrack]="audio"></audio-track-play>  
+		</audio-track>
+
 		<div *ngIf="available;">
 			<audio controls><source src="{{songUrl}}" type="audio/mpeg"></audio>
 		</div>
+
 		<ion-item>
 			<ion-input [(ngModel)]="songName" type="text" placeholder="Nome da música" required></ion-input>
-		</ion-item>
-		<ion-item>
-			<button ion-button (click) = "searchDeezer()" >Buscar no Deezer</button>
-			<br>
+			<button *ngIf="deezerAvailable;" ion-button (click) = "searchDeezer()" item-content round>
+				<ion-icon name="md-search"></ion-icon> 
+			</button>
 		</ion-item>
 
 		<ion-item>
-			<ion-input [(ngModel)]="songArtist" type="text" placeholder="Artista" required></ion-input>
+			<ion-input [(ngModel)]="songArtist" type="text" placeholder="Artista"></ion-input>
 		</ion-item>
 
 		<ion-item>
 			<ion-input [(ngModel)]="songTag" type="text" placeholder="TagList"></ion-input>
+			<button ion-button (click) = "newTag()" item-content round>
+				<ion-icon name="md-add"></ion-icon> 
+			</button>
 		</ion-item>
 
 		<ion-item>
-			<button ion-button (click) = "newTag()" >Nova tag</button>
-			<br>
-			<div *ngFor="let tag of createdTags" class="tag">
-				<ion-badge>
+			<div *ngFor="let tag of createdTags" class="tagContainer">
+				<ion-badge class="tag">
 					{{tag}}
-					<ion-icon name="close" (click) = "removeTag(tag)"></ion-icon> 
+					<ion-icon name="close" (click) = "removeTag(tag)" class="tagIcon"></ion-icon> 
 				</ion-badge>
 			</div>
 		</ion-item>
 		<ion-item>
-			<h2>Habilidade:</h2>
+			<h2 class="centerElement">Habilidade</h2>
 			<rating [(ngModel)]="songRate" 
+			class="centerElement"
 			readOnly="false"
 			max="5"
 			emptyStarIconName="star-outline"
@@ -50,9 +57,14 @@
 		</rating>
 	</ion-item>
 	<ion-item>
-		 <ion-label color="primary">Notas:</ion-label>
-		<ion-textarea [(ngModel)]="songNotes" placeholder="Afinação, técnicas, trechos, ..."></ion-textarea>
+		<ion-textarea [(ngModel)]="songNotes" placeholder="Notas: Afinação, técnicas, trechos, ..."></ion-textarea>
 	</ion-item>
+	<div class="centerElement">
+		<button ion-button (click) = "clearDeezerInfo()" class="ionButton">Remover</button>
+	</div>
+	<div class="centerElement">
+		<button ion-button (click) = "newSong()" class="ionButton">Criar Música</button>
+	</div>
 </ion-list>
-<button ion-button (click) = "newSong()">Criar</button>
+
 </ion-content>

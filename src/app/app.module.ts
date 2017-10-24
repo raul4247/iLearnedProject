@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 import { Clipboard } from '@ionic-native/clipboard';
+import { IonicAudioModule, WebAudioProvider, CordovaMediaProvider, defaultAudioProviderFactory } from 'ionic-audio';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
@@ -22,6 +23,9 @@ import { DeezerSearchPage } from '../pages/deezer-search/deezer-search';
 
 import { DataProvider } from '../providers/data/data';
 
+export function myCustomAudioProviderFactory() {
+  return (window.hasOwnProperty('cordova')) ? new CordovaMediaProvider() : new WebAudioProvider();
+}
 
 @NgModule({
   declarations: [
@@ -40,7 +44,8 @@ import { DataProvider } from '../providers/data/data';
   HttpModule,
   IonicModule.forRoot(MyApp),
   IonicStorageModule.forRoot(),
-  Ionic2RatingModule
+  Ionic2RatingModule,
+  IonicAudioModule.forRoot(defaultAudioProviderFactory)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -59,7 +64,7 @@ import { DataProvider } from '../providers/data/data';
   SplashScreen,
   Clipboard,
   {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataProvider
+  DataProvider
   ]
 })
 export class AppModule {}

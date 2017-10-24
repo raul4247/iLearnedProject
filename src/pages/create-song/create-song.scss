@@ -1,7 +1,19 @@
 page-create-song {
-
-}
-
-.tag{
-	float: left !important;
+	.tagContainer{
+		float: left;
+		padding-left:16px;
+	}
+	.centerElement{
+		text-align: center;
+	}
+	.tag{
+		margin-right: 1em;
+		margin-bottom: 0.5em;
+	}
+	.tagIcon{
+		margin-left: 0.5em;
+	}
+	.ionButton{
+		width:100%;
+	}
 }
