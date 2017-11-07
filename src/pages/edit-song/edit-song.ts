@@ -81,6 +81,7 @@ export class EditSongPage {
 		this.available = true;
 	}
 	clearDeezerInfo(){
+	    this._audioProvider.stop();
 		this.songImg = 'assets/imgs/placeholder180x180.jpg';
 		this.song.name = '';
 		this.song.artist = '';
@@ -178,5 +179,9 @@ export class EditSongPage {
 			this.loader.dismiss();
 			this.loader = null;
 		}
+	}
+
+	ionViewWillUnload(){
+	    this._audioProvider.stop();
 	}
 }

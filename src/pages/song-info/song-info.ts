@@ -150,4 +150,7 @@ export class SongInfoPage {
 			this.loader = null;
 		}
 	}
+	ionViewWillUnload(){
+	    this._audioProvider.stop();
+	}
 }

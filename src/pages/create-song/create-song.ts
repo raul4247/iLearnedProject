@@ -120,6 +120,7 @@ export class CreateSongPage {
 		this.available = true;
 	}
 	clearDeezerInfo(){
+	    this._audioProvider.stop();
 		this.songImg = 'assets/imgs/placeholder180x180.jpg';
 		this.songName = '';
 		this.songArtist = '';
@@ -127,5 +128,6 @@ export class CreateSongPage {
 	}
 	ionViewWillUnload(){
 		this.data.clearDeezerSongCache();
+	    this._audioProvider.stop();
 	}
 }
