@@ -32,38 +32,39 @@ export class ConfigPage {
 	}
 
 	checkImport(){
-		try{
-			let confirm = this.alertCtrl.create({
-				title: 'Confirmação:',
-				message: 'Todos os dados atuais serão sobrescritos, e tenha certeza de que os dados estão no formato do iLearned.',
-				buttons: [
-				{
-					text: 'Cancelar',
-					handler: () => {}
-				},
-				{
-					text: 'Importar',
-					handler: () => {
-						this.data.cleanCache();
-						this.data.cleanLocalStorage();
-						this.data.importSongs(JSON.parse(this.importData));
-						this.data.setDeezerAvailable(this.deezer);
-						let toast = this.toastCtrl.create({
-							message: 'Dados importados!',
-							duration: 3000,
-							position: 'bottom',
-							showCloseButton: true,
-							closeButtonText: 'OK'
-						});
+		try {
+			if(JSON.parse(this.importData) && !!this.importData){
+				let confirm = this.alertCtrl.create({
+					title: 'Confirmação:',
+					message: 'Todos os dados atuais serão sobrescritos, e tenha certeza de que os dados estão no formato do iLearned.',
+					buttons: [
+					{
+						text: 'Cancelar',
+						handler: () => {}
+					},
+					{
+						text: 'Importar',
+						handler: () => {
+							this.data.cleanCache();
+							this.data.cleanLocalStorage();
+							this.data.importSongs(JSON.parse(this.importData));
+							this.data.setDeezerAvailable(this.deezer);
+							let toast = this.toastCtrl.create({
+								message: 'Dados importados!',
+								duration: 3000,
+								position: 'bottom',
+								showCloseButton: true,
+								closeButtonText: 'OK'
+							});
 
-						toast.present();
+							toast.present();
+						}
 					}
-				}
-				]
-			});
-			confirm.present();
-		}
-		catch(e){
+					]
+				});
+				confirm.present();
+			}
+		} catch (e) {
 			let toast = this.toastCtrl.create({
 				message: 'Erro: O formato não é JSON',
 				duration: 1500,
@@ -71,7 +72,6 @@ export class ConfigPage {
 				showCloseButton: true,
 				closeButtonText: 'OK'
 			});
-
 			toast.present();
 		}
 	}
@@ -92,7 +92,7 @@ export class ConfigPage {
 	generateExport(){
 		var me = this;
 		this.data.storage.get('songs').then(function (json){
-			me.exportData = JSON.stringify(json);
+			me.exportData = json;
 		});
 	}
 

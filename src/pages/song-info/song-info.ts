@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 
 import { EditSongPage } from '../edit-song/edit-song';
 import { DataProvider } from '../../providers/data/data';
+import { AudioProvider } from 'ionic-audio';
 
 @IonicPage()
 @Component({
@@ -30,7 +31,8 @@ export class SongInfoPage {
 		public toastCtrl: ToastController,
 		public loading: LoadingController,
 		public http: Http,
-		public data:DataProvider){
+		public data:DataProvider,
+		private _audioProvider: AudioProvider){
 		this.id = this.navParams.get("id");
 		this.song = this.data.getSongById(this.id);
 
@@ -48,6 +50,15 @@ export class SongInfoPage {
 			this.notes = true;
 		}
 		this.deezerAvailable = this.data.getDeezerAvailable();	
+		this.myTracks = [{
+			src: '',
+			preload: 'metadata'
+		}];
+	}
+	myTracks: any[];
+	allTracks: any[];
+	ngAfterContentInit() {     
+		this.allTracks = this._audioProvider.tracks; 
 	}
 
 	ionViewWillEnter(){
@@ -71,6 +82,7 @@ export class SongInfoPage {
 	loadDeezerInfo(data){
 		this.songImg = data.album.cover_medium;
 		this.songUrl = data.preview;
+		this.myTracks[0].src = this.songUrl;
 		this.available = true;
 		this.dismissLoader();
 	}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Provider } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { CreateSongPage } from '../create-song/create-song';
@@ -12,10 +12,12 @@ import { DataProvider } from '../../providers/data/data';
 })
 
 export class HomePage {
-	public list;
+	public list = [];
 
 	constructor(public navCtrl: NavController, 
 		public data:DataProvider){}
+
+
 
 	ionViewDidLoad(){
 		var me = this;

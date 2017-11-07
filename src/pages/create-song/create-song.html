@@ -7,36 +7,30 @@
 <ion-content padding>
 	<ion-list>
 		<ion-item class="centerElement">
-			<ion-img width="180" height="180" src="{{deezerAvailable && songImg || 'assets/imgs/placeholder180x180.jpg'}}"></ion-img>
+			<ion-img width="180" height="180" cache="true" src="{{deezerAvailable && songImg || 'assets/imgs/placeholder180x180.jpg'}}"></ion-img>
 		</ion-item>
-
-		<audio-track #audio [track]="track">
-			<audio-track-play dark [audioTrack]="audio"></audio-track-play>  
-		</audio-track>
-
-		<div *ngIf="available;">
-			<audio controls><source src="{{songUrl}}" type="audio/mpeg"></audio>
-		</div>
-
+		<ion-item *ngIf="available;" class="centerElement">
+			<audio-track #audio *ngFor="let track of myTracks"  [track]="track">
+				<audio-track-play  dark [audioTrack]="audio"><ion-spinner></ion-spinner></audio-track-play>  
+				<audio-track-progress-bar dark duration progress [audioTrack]="audio"></audio-track-progress-bar>
+			</audio-track>
+		</ion-item>
 		<ion-item>
-			<ion-input [(ngModel)]="songName" type="text" placeholder="Nome da música" required></ion-input>
+			<ion-input [(ngModel)]="songName" type="text" placeholder="Nome da música"></ion-input>
 			<button *ngIf="deezerAvailable;" ion-button (click) = "searchDeezer()" item-content round>
 				<ion-icon name="md-search"></ion-icon> 
 			</button>
 		</ion-item>
-
 		<ion-item>
 			<ion-input [(ngModel)]="songArtist" type="text" placeholder="Artista"></ion-input>
 		</ion-item>
-
 		<ion-item>
 			<ion-input [(ngModel)]="songTag" type="text" placeholder="TagList"></ion-input>
 			<button ion-button (click) = "newTag()" item-content round>
-				<ion-icon name="md-add"></ion-icon> 
+				<ion-icon class="newTag" name="md-add"></ion-icon> 
 			</button>
 		</ion-item>
-
-		<ion-item>
+		<ion-item *ngIf="createdTags.length > 0;">
 			<div *ngFor="let tag of createdTags" class="tagContainer">
 				<ion-badge class="tag">
 					{{tag}}
@@ -59,8 +53,9 @@
 	<ion-item>
 		<ion-textarea [(ngModel)]="songNotes" placeholder="Notas: Afinação, técnicas, trechos, ..."></ion-textarea>
 	</ion-item>
+	<br>
 	<div class="centerElement">
-		<button ion-button (click) = "clearDeezerInfo()" class="ionButton">Remover</button>
+		<button ion-button (click) = "clearDeezerInfo()" class="ionButton">Limpar dados</button>
 	</div>
 	<div class="centerElement">
 		<button ion-button (click) = "newSong()" class="ionButton">Criar Música</button>

@@ -13,7 +13,7 @@ import { DataProvider } from '../../providers/data/data';
 })
 export class TagsPage {
 	public list;
-	public tags;
+	public tags = [];
 	public tagsList;
 
 	constructor(public navCtrl: NavController, 
@@ -22,8 +22,6 @@ export class TagsPage {
 	ionViewWillEnter(){
 		this.tagsList = this.data.createTagLists();
 		this.tags = Object.keys(this.tagsList);
-
-		// FALTA ORGANIZAR EM ORDEM ALFABETICA AS TAGS
 	}
 
 	createSong(){

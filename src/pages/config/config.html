@@ -7,28 +7,38 @@
 <ion-content padding>
 	<ion-list>
 		<ion-item>
-			<ion-label >Importar dados:</ion-label>
-			<ion-input [(ngModel)]="importData"></ion-input>
+			<ion-label>Importar Dados Ext.</ion-label>
+			<ion-input [(ngModel)]="importData" type="text"></ion-input>
+			<button ion-button (click) = "checkImport()" item-content round>
+				<ion-icon name="md-arrow-round-up"></ion-icon> 
+			</button>
 		</ion-item>
 		<ion-item>
-			<button ion-button (click) = "checkImport()" color="light">Importar JSON</button>
-		</ion-item>		
-		<ion-item>		
-			<button ion-button (click) = "showExample()">Exemplo de objeto</button>
-		</ion-item>		
-
-		<ion-item>
-			<ion-label >Exportar dados:</ion-label>
-			<ion-input [(ngModel)]="exportData"></ion-input>
-		</ion-item>
-		<ion-item>
-			<button ion-button (click) = "copyToClipboard()" color="light">Copiar para Clipboard</button>
+			<ion-label>Exportar Dados Int.</ion-label>
+			<ion-input [(ngModel)]="exportData" type="text"></ion-input>
+			<button ion-button (click) = "copyToClipboard()" item-content round>
+				<ion-icon name="md-clipboard"></ion-icon> 
+			</button>
 		</ion-item>
 		<ion-item>
 			<ion-label>Usar Deezer</ion-label>
 			<ion-toggle [(ngModel)]="deezer" (click) = "toogleDeezer()"></ion-toggle>
 		</ion-item>
+		<br>
+		<div class="row">
+			<button class="col" style="margin-right: 3%" ion-button (click) = "showExample()">Exemplo de objeto</button>
+			<button class="col" ion-button (click) = "cleanData()">Limpar Dados</button>
+		</div>
+		<br>
+		<button ion-button (click) = "about()" class="ionButton">Sobre</button>
+		
+		<ion-item class="Powered">
+			<h2>Powered by:</h2>
+			<br>
+			<ion-img width="200" height="69" src="assets/imgs/ionicLogo.png"></ion-img>
+			<br>
+			<br>
+			<ion-img width="169" height="37" src="assets/imgs/deezerLogo.png"></ion-img>
+		</ion-item>
 	</ion-list>
-	<button ion-button (click) = "cleanData()">Limpar Dados</button>
-	<button ion-button (click) = "about()">Sobre</button>
 </ion-content>

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { AudioProvider } from 'ionic-audio';
 
 import { DeezerSearchPage } from '../deezer-search/deezer-search';
 import { DataProvider } from '../../providers/data/data';
+import { AudioProvider } from 'ionic-audio';
 
 @IonicPage()
 @Component({
@@ -21,7 +21,7 @@ export class CreateSongPage {
 	rsp: string;
 	available: boolean = false;
 	songRate: number;
-	createdTags = [];
+	public createdTags : Array<string> = [];
 	public info = null;
 
 	public deezerAvailable : boolean;
@@ -29,13 +29,25 @@ export class CreateSongPage {
 	constructor(public navCtrl: NavController, 
 		public navParams: NavParams,
 		public toastCtrl: ToastController,
-		public data:DataProvider) {
+		public data:DataProvider,
+		private _audioProvider: AudioProvider){
 		var deez = this.data.getDeezerAvailable();
 
 		if(deez	== null ||deez == undefined)
 			this.data.setDeezerAvailable(true);
 		else
 			this.deezerAvailable = deez;
+
+		this.myTracks = [{
+			src: '',
+			preload: 'metadata'
+		}];
+	}
+
+	myTracks: any[];
+	allTracks: any[];
+	ngAfterContentInit() {     
+		this.allTracks = this._audioProvider.tracks; 
 	}
 
 	ionViewWillEnter(){
@@ -88,11 +100,11 @@ export class CreateSongPage {
 	}
 
 	newTag(){
-		if(this.songTag != "" && this.songTag !=undefined){
+		if(this.songTag != "" && this.songTag !=undefined && this.createdTags.indexOf(this.songTag) == -1)
 			this.createdTags.push(this.songTag);
-			this.songTag = "";
-		}
+		this.songTag = "";
 	}
+
 	removeTag(tag){
 		this.createdTags.splice(this.createdTags.indexOf(tag), 1);
 	}
@@ -104,6 +116,7 @@ export class CreateSongPage {
 		this.songName = deezerInfo.title_short;
 		this.songArtist = deezerInfo.artist.name;
 		this.songUrl = deezerInfo.preview;
+		this.myTracks[0].src = this.songUrl;
 		this.available = true;
 	}
 	clearDeezerInfo(){

@@ -1,14 +1,18 @@
 <ion-header>
 	<ion-navbar>
-		<ion-title>Tags</ion-title>
+		<ion-title>Suas Tags</ion-title>
 	</ion-navbar>
 </ion-header>
 
 <ion-content>
 	<ion-item-group>
-		<div *ngFor="let tag of tags	">
-			<ion-item-divider color="light">{{tag}}</ion-item-divider>
+		<div *ngFor="let tag of tags">
+			<ion-item-divider class="tagName" color="light">{{tag}}</ion-item-divider>
 			<ion-item *ngFor="let song of tagsList[tag]" #elem id={{song.id}}  (click)="songInfoPage(song.id)">{{song.name}}</ion-item>
 		</div>
+		<ion-item *ngIf="tags.length == 0;">
+			<p>Suas listas estão vazias!</p>
+			<p>Comece adicionando algumas músicas.</p>
+		</ion-item>
 	</ion-item-group>
 </ion-content>

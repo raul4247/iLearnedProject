@@ -13,8 +13,7 @@ Ideia: Um aplicativo que guarda informações de músicas que um usuário está 
     * ordem alfabética
 	* tag
 
-* API:
-  * Deezer
+* API Deezer:
   * Fazer busca de músicas por nome
   * Visualizar nome, artista, prévia de áudio e imagem do álbum
 
@@ -23,11 +22,7 @@ Ideia: Um aplicativo que guarda informações de músicas que um usuário está 
   * Exportar informações
   * Optar por usar ou não o deezer
 
-* bugs:
- * nenhum (por enquanto)
-
 ## To do:
-* Elaborar Design
 * Fazer Placeholder
 * Fazer ícone
 * splash screen?

@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 
 import { DeezerSearchPage } from '../deezer-search/deezer-search';
 import { DataProvider } from '../../providers/data/data';
+import { AudioProvider } from 'ionic-audio';
 
 @IonicPage()
 @Component({
@@ -30,7 +31,8 @@ export class EditSongPage {
 		public toastCtrl: ToastController,
 		public loading: LoadingController,
 		public http: Http,
-		public navParams: NavParams){
+		public navParams: NavParams,
+		private _audioProvider: AudioProvider){
 		this.id = this.navParams.get("id");
 		this.song = this.data.getSongById(this.id);
 
@@ -46,6 +48,16 @@ export class EditSongPage {
 				err => me.errorDeezer()				
 				);
 		}
+		this.myTracks = [{
+			src: '',
+			preload: 'metadata'
+		}];
+	}
+
+	myTracks: any[];
+	allTracks: any[];
+	ngAfterContentInit() {     
+		this.allTracks = this._audioProvider.tracks; 
 	}
 
 	ionViewWillEnter(){
@@ -65,18 +77,24 @@ export class EditSongPage {
 		this.song.name = deezerInfo.title_short;
 		this.song.artist = deezerInfo.artist.name;
 		this.songUrl = deezerInfo.preview;
+		this.myTracks[0].src = this.songUrl;
 		this.available = true;
 	}
 	clearDeezerInfo(){
 		this.songImg = 'assets/imgs/placeholder180x180.jpg';
 		this.song.name = '';
 		this.song.artist = '';
+		this.song.tag = [];
+		this.song.rate = 0;
+		this.song.notes = '';
 		this.available = false;
+		this.songTag = '';
 	}
 
 	loadDeezerInfo(data){
 		this.songImg = data.album.cover_medium;
 		this.songUrl = data.preview;
+		this.myTracks[0].src = this.songUrl;
 		this.available = true;
 		this.dismissLoader();
 	}
@@ -120,7 +138,9 @@ export class EditSongPage {
 	}
 
 	newTag(){
-		this.song.tag.push(this.songTag);
+		if(this.songTag != "" && this.songTag !=undefined && !this.song.tag.includes(this.songTag))
+			this.song.tag.push(this.songTag);
+		this.songTag = "";
 	}
 	
 	removeTag(tag){

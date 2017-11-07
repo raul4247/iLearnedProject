@@ -6,12 +6,15 @@
 
 <ion-content padding>
 	<ion-list>
-		<ion-item>
-			<ion-img width="180" height="180" src="{{deezerAvailable && songImg || 'assets/imgs/placeholder180x180.jpg'}}"></ion-img>
+		<ion-item class="centerElement">
+			<ion-img width="180" height="180" cache="true" src="{{deezerAvailable && songImg || 'assets/imgs/placeholder180x180.jpg'}}"></ion-img>
 		</ion-item>
-		<div *ngIf="available && deezerAvailable;">
-			<audio controls><source src="{{songUrl}}" type="audio/mpeg"></audio>
-		</div>
+		<ion-item *ngIf="available;" class="centerElement">
+			<audio-track #audio *ngFor="let track of myTracks"  [track]="track">
+				<audio-track-play  dark [audioTrack]="audio"><ion-spinner></ion-spinner></audio-track-play>  
+				<audio-track-progress-bar dark duration progress [audioTrack]="audio"></audio-track-progress-bar>
+			</audio-track>
+		</ion-item>
 		<ion-item>
 			<h2 class="song-title">Nome da música:</h2>
 			<p>{{song.name}}</p>
@@ -20,15 +23,16 @@
 			<h2 class="song-title">Artista:</h2>
 			<p>{{song.artist}}</p>
 		</ion-item>
-		<ion-item>
+		<ion-item *ngIf="song.tag.length > 0;">
 			<h2 class="song-title">Tag:</h2>
-			<div *ngFor="let tag of song.tag" class="tag">
-				<ion-badge>{{tag}}</ion-badge>
+			<div *ngFor="let tag of song.tag" class="tagContainer">
+				<ion-badge class="tag">{{tag}}</ion-badge>
 			</div>
 		</ion-item>
 		<ion-item>
 			<h2 class="song-title">Habilidade:</h2>
 			<rating [(ngModel)]="song.rate" 
+			class="centerElement"
 			readOnly="true"
 			max="5"
 			emptyStarIconName="star-outline"
@@ -44,10 +48,10 @@
 			</div>
 		</ion-item>
 	</ion-list>
-	<ion-fab bottom left>
-		<button ion-fab mini><ion-icon name="arrow-dropright"></ion-icon></button>
-		<ion-fab-list side="right">
-			<button ion-fab (click) = "updateSong()"><ion-icon name="md-brush"></ion-icon></button>
+	<ion-fab top right>
+		<button ion-fab mini><ion-icon name="ios-more"></ion-icon></button>
+		<ion-fab-list side="down">
+			<button ion-fab (click) = "updateSong()"><ion-icon name="md-create"></ion-icon></button>
 			<button ion-fab (click) = "removeSong()"><ion-icon name="md-trash"></ion-icon></button>
 		</ion-fab-list>
 	</ion-fab>

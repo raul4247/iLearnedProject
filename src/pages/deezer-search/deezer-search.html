@@ -1,25 +1,27 @@
 <ion-header>
 	<ion-navbar>
-		<ion-title>{{searchName}}</ion-title>
+		<ion-title>Resultados:</ion-title>
 	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-	<div *ngIf="results;">
-		<div radio-group [(ngModel)]="selectedSong">
+	<div *ngIf="results;"> 
+		<ion-list radio-group [(ngModel)]="selectedSong">
 			<div class="row" *ngFor="let song of songResults; let i = index;">
-				<ion-radio value="{{i}}"></ion-radio>
-				<img  width="56" height="56" src="{{song.album.cover_small}}">
-				<div class="col">{{song.title_short}}</div>
+				<img width="56" height="56" src="{{song.album.cover_small}}">
+				<div class="col songName">{{song.title_short}}</div>
+				<ion-radio class="songName" value="{{i}}"></ion-radio>
 			</div>
-		</div>
-		<ion-fab bottom right>
-			<button (click) = "selectSong()" ion-fab color="primary">
-				<ion-icon name="md-checkmark"></ion-icon>
-			</button>
-		</ion-fab>
+		</ion-list>
 	</div>
 	<div *ngIf="!results;">
-	<p>Nenhum resultado foi encontrado!</p>
+		<p>Nenhum resultado foi encontrado!</p>
 	</div>
+	<br>
+	<br>
+	<ion-fab *ngIf="results;" bottom right>
+		<button (click) = "selectSong()" ion-fab color="primary">
+			<ion-icon name="md-checkmark"></ion-icon>
+		</button>
+	</ion-fab>
 </ion-content>

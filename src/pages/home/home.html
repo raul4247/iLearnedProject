@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Home
+      Suas Músicas
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -9,9 +9,13 @@
 <ion-content>
   <ion-item-group>
     <ion-item *ngFor="let song of list" #elem id={{song.id}}  (click)="songInfoPage(song.id)">{{song.name}}</ion-item>
+    <ion-item *ngIf="list.length == 0;">
+      <p>Suas listas estão vazias!</p>
+      <p>Comece adicionando algumas músicas.</p>
+    </ion-item>
   </ion-item-group>
-  <ion-fab bottom right >
-    <button (click) = "createSong()" ion-fab color="danger">
+  <ion-fab bottom right>
+    <button (click) = "createSong()" ion-fab color="primary">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>

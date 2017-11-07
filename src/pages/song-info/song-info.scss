@@ -1,20 +1,33 @@
 page-song-info {
-
-}
-.song-title{
-	margin-top:1% !important;
-}
-
-ul {
-  padding: 0px;
- 
-  &.rating li {
-    padding: 5px 10px !important;
-    background: none;
-    color: #ffb400;
- 
-    ion-icon {
-      font-size: 30px;
+  .song-title{
+  	margin-top:1% !important;
+  }
+  .tagContainer{
+    float: left;
+  }
+  .centerElement{
+    text-align: center;
+  }
+  .tag{
+    margin-right: 1em;
+    margin-bottom: 0.5em;
+    padding:0.5em;
+  }
+  .tagIcon{
+    margin-left: 0.5em;
+  }
+  .ionButton{
+    width:100%;
+  }
+  ul {
+    padding: 0px;
+    &.rating li {
+      padding: 5px 10px !important;
+      background: none;
+      color: #ffb400;
+      ion-icon {
+        font-size: 30px;
+      }
     }
   }
 }
