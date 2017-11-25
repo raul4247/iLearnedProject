@@ -180,8 +180,7 @@ export class EditSongPage {
 			this.loader = null;
 		}
 	}
-
-	ionViewWillUnload(){
+	ionViewWillLeave(){
 	    this._audioProvider.stop();
 	}
 }

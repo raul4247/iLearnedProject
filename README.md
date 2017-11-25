@@ -23,6 +23,3 @@ Ideia: Um aplicativo que guarda informações de músicas que um usuário está 
   * Optar por usar ou não o deezer
 
 ## To do:
-* Fazer Placeholder
-* Fazer ícone
-* splash screen?
