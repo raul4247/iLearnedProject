@@ -22,4 +22,4 @@ Ideia: Um aplicativo que guarda informações de músicas que um usuário está 
   * Exportar informações
   * Optar por usar ou não o deezer
 
-## To do:
+## To do: 
